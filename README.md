@@ -14,6 +14,7 @@ cnpm i puppeteer
 ```
 
 ## 文档
-[GitHub地址](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageclickselector-options)
+[原文地址](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageclickselector-options)
+[中文地址](https://zhaoqize.github.io/puppeteer-api-zh_CN/#/class-Tracing)
 ## 说明
-利用chromium模拟打开浏览器，并访问真实地址，并将dev-tools中network进行截图保存，出个报告
+利用chromium模拟打开浏览器，并访问真实地址，并将dev-tools进行截图保存，出个报告
