@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
+// 自由定义各种设备，可以在调用时遍历循环对象
 const iPhone = devices['iPhone 6'];
 const spath = './snapshoot/'
 let timeout = function (delay) {
@@ -25,9 +26,8 @@ let timeout = function (delay) {
             headless: false
         });
         const page = await browser.newPage();
-        await page.goto('http://www.100tal.com');
-        console.log('start /t');
-
+        // 不同设备可以通过emulate模仿，可以遍历device也可以一个个写
+        /*
         await page.emulate(iPhone);//参数可自定义,如下
         let dev_xm5 = {
             'name': 'XiaoMi S5', //设备名
@@ -41,14 +41,16 @@ let timeout = function (delay) {
                 'isLandscape': false//
             }
         };
-
+        */
+        await page.goto('http://www.100tal.com');
+        console.log('start /t');
         // 获取页面标题
         let title = await page.title();
         console.log(title);
         console.log('pc截图');
         await timeout(2000);
         await page.screenshot({
-            path: spath+title+'.png',
+            path: spath + title + '.png',
             type: 'png',
             // quality: 100, 只对jpg有效
             fullPage: true,
@@ -61,9 +63,30 @@ let timeout = function (delay) {
             // }
         });
         console.log("点击要测试的按钮");
-        await page.tap('.');
+        // tap就是手机端的点击操作，pc端还是click，type就是输入
+        await page.tap('.btn');
         await page.screenshot({
-            path: spath+'2.png'
+            path: spath + '2.png'
         });
+        console.log("登录");
+        await page.tap("#u"); //直接操作dom选择器，是不是很方便
+        await page.type("521017853");
+
+        await page.tap("#p");
+        await page.type("*********");//这里密码就不展示了哈
+
+        await page.tap("#go");//提交
+        // 性能和bug，trace就是chrome 的 devtools，打开浏览器把json上传即可看到。
+        await page.tracing.start({path: './trace.json'});
+        await timeout(3000);// 延时等待
+
+        await page.screenshot({
+            path: spath+'3.png'
+        });
+        // 结束
+        await page.tracing.stop();
+
+        console.log("登录成功");
+        // 如果看结果可以不关闭
         // await browser.close();
     })();
