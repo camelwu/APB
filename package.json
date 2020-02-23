@@ -12,5 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "puppeteer": "^1.9.0"
+  },
+  "devDependencies": {
+    "webpack-marauder": "^1.21.0"
   }
 }
