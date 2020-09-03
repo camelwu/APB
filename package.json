@@ -11,7 +11,7 @@
   "author": "WuSongBo",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^1.9.0"
+    "puppeteer": "^1.13.0"
   },
   "devDependencies": {
     "webpack-marauder": "^1.21.0"
